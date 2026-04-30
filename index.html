@@ -12,63 +12,48 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  /* Warm cream + beige foundation */
   --white:#F4ECDB;
   --bone:#F9F4E6;
   --off-white:#E5D8BC;
   --warm:#EDE1C8;
   --beige:#DDC9A1;
-
-  /* Greens — primary palette */
   --sage-mist:#EFF2EA;
   --sage-pale:#DDE3CF;
   --sage:#A8B79E;
   --sage-deep:#6B7A65;
   --forest:#3F5640;
   --forest-dark:#2A3A2C;
-
-  /* Brand blues — kept minimal, used as accent only */
   --blue-deep:#3F5640;
   --blue:#6B7A65;
   --blue-mid:#8A9A82;
   --blue-light:#C8D4BD;
   --blue-pale:#EFF2EA;
   --blue-ghost:#F0EBDC;
-
-  /* Copper variables repointed to greens (preserves all existing CSS) */
   --copper:#6B7A65;
   --copper-light:#A0B098;
   --copper-deep:#3F5640;
   --copper-glow:#D5DCC9;
-
-  /* Brass aliases also point at greens */
   --brass:#6B7A65;
   --brass-light:#A0B098;
   --brass-deep:#3F5640;
   --gold:#6B7A65;
-
-  /* Forest ink */
   --ink:#1F2D20;
   --ink-dim:#4A5A48;
   --ink-faint:#8A988A;
   --espresso:#2A3A2C;
   --rule:rgba(31,45,32,0.10);
   --rule-strong:rgba(31,45,32,0.18);
-
-  /* Type */
   --serif:'Cormorant Garamond',Georgia,serif;
   --sans:'DM Sans',system-ui,sans-serif;
   --mono:'DM Mono',ui-monospace,monospace;
-
-  /* Shadows */
   --shadow:0 4px 24px rgba(31,45,32,0.07);
   --shadow-lg:0 18px 50px rgba(31,45,32,0.13);
-
-  /* Easing */
   --ease-out:cubic-bezier(0.16,1,0.3,1);
   --ease-smooth:cubic-bezier(0.4,0,0.2,1);
   --ease-soft:cubic-bezier(0.65,0,0.35,1);
   --radius:6px;
+  /* Footer-style gradient reused throughout */
+  --grad-forest:linear-gradient(135deg,#3F5640 0%,#2A3A2C 55%,#1F2A20 100%);
 }
 
 html{scroll-behavior:smooth}
@@ -77,23 +62,25 @@ a{color:inherit;text-decoration:none}
 ::selection{background:var(--blue-light);color:var(--blue-deep)}
 img{max-width:100%;display:block}
 
-/* ── NOISE TEXTURE ── */
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.035;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
 
-/* ── UTILITY BAR ── */
-.utility-bar{position:fixed;top:0;left:0;right:0;z-index:101;background:var(--ink);color:rgba(255,255,255,0.78);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:9px 52px;display:flex;justify-content:space-between;align-items:center;line-height:1.4}
-.utility-bar a{color:rgba(255,255,255,0.78);transition:color .3s var(--ease-out);display:inline-flex;align-items:center;gap:5px}
-.utility-bar a:hover{color:var(--brass-light)}
-.utility-left{display:flex;align-items:center;gap:6px}
-.utility-right{display:flex;align-items:center;gap:14px}
-.util-divider{opacity:.3}
-.util-emergency{color:var(--brass-light)!important}
-.util-badge{color:var(--brass-light);font-weight:500}
-.util-icon{font-size:13px;opacity:.85}
-
 /* ── NAV ── */
-nav{position:fixed;top:46px;left:24px;right:24px;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:40px;padding:14px 28px 14px 24px;background:rgba(244,236,219,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(107,122,101,0.20);border-radius:999px;transition:box-shadow .4s var(--ease-out),transform .4s var(--ease-out);box-shadow:0 4px 24px rgba(31,45,32,0.06),inset 0 1px 0 rgba(255,255,255,0.4);max-width:1480px;margin:0 auto}
-nav.scrolled{box-shadow:0 8px 32px rgba(31,45,32,0.12),inset 0 1px 0 rgba(255,255,255,0.4)}
+nav{
+  position:fixed;top:20px;left:50%;transform:translateX(-50%);
+  z-index:100;width:90%;max-width:1480px;
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:40px;
+  padding:14px 28px 14px 24px;
+  background:rgba(244,236,219,0.68);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border:1px solid rgba(107,122,101,0.22);border-radius:999px;
+  transition:width .65s var(--ease-out),background .45s var(--ease-out),box-shadow .45s var(--ease-out);
+  box-shadow:0 4px 24px rgba(31,45,32,0.08),inset 0 1px 0 rgba(255,255,255,0.5);
+}
+nav.scrolled{
+  width:75%;background:rgba(244,236,219,0.86);
+  backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
+  box-shadow:0 8px 36px rgba(31,45,32,0.14),inset 0 1px 0 rgba(255,255,255,0.5);
+}
 .nav-brand{display:flex;align-items:center;gap:14px}
 .nav-logo-mark{width:36px;height:36px;flex-shrink:0}
 .nav-brand-name{font-family:var(--serif);font-size:18px;font-weight:500;color:var(--ink);line-height:1.1;letter-spacing:.02em;text-transform:uppercase}
@@ -106,58 +93,100 @@ nav ul a:hover::after{transform:scaleX(1)}
 .nav-cta{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;background:transparent;color:var(--ink);border:1px solid var(--copper);border-radius:999px;font-size:10.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;font-family:var(--mono);transition:all .4s var(--ease-out)}
 .nav-cta:hover{background:var(--copper);color:#fff}
 
-/* ── HERO (RESTRUCTURED: two-column grid) ── */
-.hero{position:relative;padding:150px 52px 80px;border-bottom:1px solid var(--rule);overflow:hidden}
-.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:72px;align-items:center;max-width:1560px;margin:0 auto;position:relative;z-index:1}
-.hero-content{max-width:none}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--brass);margin-bottom:30px;font-weight:500}
-.hero-eyebrow::before{content:"";width:36px;height:1px;background:var(--brass)}
-.hero-content h1{font-family:var(--serif);font-weight:300;font-size:clamp(56px,7vw,108px);line-height:.94;letter-spacing:-.035em;color:var(--ink);margin-bottom:28px}
-.hero-content h1 em{font-style:italic;color:var(--copper);font-weight:300}
+/* ── HERO ── */
+.hero{position:relative;height:100vh;min-height:680px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center;animation:kenburns 28s ease-in-out infinite alternate}
+@keyframes kenburns{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.06) translate(-1.5%,-1%)}}
 
-/* Social proof badge — small inline pill below H1 */
-.hero-social-proof{display:inline-flex;align-items:center;gap:14px;margin-bottom:30px;padding:10px 20px;background:var(--bone);border:1px solid var(--rule);border-radius:999px;box-shadow:0 2px 14px rgba(31,45,32,0.06)}
-.hero-stars{color:var(--brass);letter-spacing:1.5px;font-size:13px;line-height:1}
-.hero-social-text{font-size:12.5px;color:var(--ink-dim);font-weight:400;letter-spacing:.005em}
-.hero-social-text strong{color:var(--ink);font-weight:500}
-.hero-social-divider{width:1px;height:14px;background:var(--rule-strong)}
-
-.hero-content p.hero-lede{font-size:16px;color:var(--ink-dim);line-height:1.7;max-width:480px;margin-bottom:36px}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.btn-primary{display:inline-flex;align-items:center;gap:12px;padding:18px 32px;background:var(--copper);color:#fff;border-radius:2px;font-size:11px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;transition:background .4s var(--ease-out),transform .3s var(--ease-out),box-shadow .4s var(--ease-out);border:1px solid var(--copper);cursor:pointer;font-family:var(--mono)}
-.btn-primary:hover{background:var(--copper-deep);border-color:var(--copper-deep);transform:translateY(-1px)}
-.btn-primary svg{transition:transform .4s var(--ease-out)}
-.btn-primary:hover svg{transform:translateX(3px)}
-.btn-secondary{display:inline-flex;align-items:center;gap:12px;padding:18px 32px;background:transparent;color:var(--ink);border-radius:2px;font-size:11px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;transition:all .4s var(--ease-out);border:1px solid var(--copper);cursor:pointer;font-family:var(--mono)}
-.btn-secondary:hover{background:var(--copper);color:#fff;transform:translateY(-1px)}
-
-/* Hero visual column (right): photo + tagline */
-.hero-visual{display:flex;flex-direction:column;gap:22px}
-.hero-photo{aspect-ratio:5/4;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-lg);position:relative;background:linear-gradient(145deg,var(--warm) 0%,var(--blue-ghost) 100%)}
-.hero-photo img{width:100%;height:100%;object-fit:cover;filter:sepia(0.08) saturate(0.92) brightness(1.02);animation:kenburns 28s ease-in-out infinite alternate}
-.hero-photo:hover img{animation-play-state:paused}
-@keyframes kenburns{
-  0%{transform:scale(1) translate(0,0)}
-  100%{transform:scale(1.06) translate(-1.5%,-1%)}
+/* Warm cream tint matching --white (#F4ECDB), with a very subtle dark vignette for text readability */
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.18) 100%),
+    rgba(244,236,219,0.28);
 }
-.hero-photo-badge{position:absolute;bottom:18px;left:18px;background:rgba(244,236,219,0.94);backdrop-filter:blur(10px);padding:10px 18px;border-radius:2px;font-family:var(--mono);font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink);font-weight:500;box-shadow:0 2px 12px rgba(31,45,32,0.15);border:1px solid rgba(255,255,255,0.5)}
+.hero-content-center{position:relative;z-index:2;text-align:center;max-width:900px;padding:0 40px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.36em;text-transform:uppercase;color:rgba(255,255,255,0.82);margin-bottom:30px;font-weight:500}
+.hero-eyebrow::before,.hero-eyebrow::after{content:"";width:32px;height:1px;background:rgba(255,255,255,0.5)}
+.hero-content-center h1{font-family:var(--serif);font-weight:300;font-size:clamp(62px,9.5vw,132px);line-height:.90;letter-spacing:-.02em;color:#fff;text-transform:uppercase;text-shadow:0 2px 48px rgba(0,0,0,0.18)}
+.hero-content-center h1 em{font-style:italic;font-weight:300;display:block;text-transform:none;letter-spacing:-.03em}
+.hero-divider{width:56px;height:1px;background:rgba(255,255,255,0.42);margin:28px auto}
+.hero-lede{font-size:15px;color:rgba(255,255,255,0.80);line-height:1.75;max-width:500px;margin:0 auto 38px;font-weight:300;letter-spacing:.01em}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:center}
+.btn-hero-primary{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;background:rgba(255,255,255,0.10);color:#fff;border:1px solid rgba(255,255,255,0.72);border-radius:2px;font-size:11px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;transition:all .4s var(--ease-out);font-family:var(--mono);cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.btn-hero-primary:hover{background:rgba(255,255,255,0.22);border-color:#fff}
+.btn-hero-secondary{display:inline-flex;align-items:center;gap:8px;padding:16px 24px;color:rgba(255,255,255,0.70);font-size:11px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;transition:color .3s var(--ease-out);font-family:var(--mono);cursor:pointer;background:transparent;border:none}
+.btn-hero-secondary:hover{color:#fff}
+.hero-scroll{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;font-family:var(--mono);font-size:8.5px;letter-spacing:.40em;text-transform:uppercase;color:rgba(255,255,255,0.48)}
+.hero-scroll-line{width:1px;height:38px;background:rgba(255,255,255,0.32);transform-origin:top;animation:scrollPulse 2.2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{transform:scaleY(1);opacity:.32}50%{transform:scaleY(0.3);opacity:.08}}
 
-/* Tagline card (replaces old patient quote) */
-.hero-tagline{padding:28px 30px;background:var(--bone);border-left:2px solid var(--brass);border-radius:0 4px 4px 0;box-shadow:0 4px 20px rgba(31,45,32,0.05)}
-.hero-tagline-eyebrow{font-family:var(--mono);font-size:9.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--brass);margin-bottom:14px;display:flex;align-items:center;gap:10px;font-weight:500}
-.hero-tagline-eyebrow::before{content:"";width:18px;height:1px;background:var(--brass)}
-.hero-tagline-text{font-family:var(--serif);font-size:23px;font-weight:300;font-style:italic;line-height:1.4;color:var(--ink);margin-bottom:18px;letter-spacing:-.005em}
-.hero-tagline-attr{display:flex;flex-direction:column;gap:3px;padding-top:14px;border-top:1px solid var(--rule)}
-.hero-tagline-name{font-size:13px;font-weight:500;color:var(--ink-dim);letter-spacing:.01em}
-.hero-tagline-role{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--ink-faint);text-transform:uppercase}
-
-/* Hero meta strip — moved below the grid, full-width */
-.hero-rule{margin-top:64px;padding-top:28px;border-top:1px solid var(--rule);display:grid;grid-template-columns:repeat(4,1fr);gap:36px;max-width:1560px;margin-inline:auto;position:relative;z-index:1}
+/* ── HERO META BAR ── */
+.hero-meta-bar{background:var(--white);border-bottom:1px solid var(--rule);padding:28px 52px}
+.hero-meta-bar-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:36px;max-width:1560px;margin:0 auto}
 .hero-meta{display:flex;flex-direction:column;gap:3px}
 .hero-meta-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint)}
 .hero-meta-val{font-size:14px;color:var(--ink-dim)}
 .hero-meta-val a{color:var(--copper);transition:opacity .3s var(--ease-out)}
 .hero-meta-val a:hover{opacity:.7}
+
+/* ── FOREST GRADIENT BAND ── */
+.gradient-band{
+  background:var(--grad-forest);
+  padding:60px 52px;
+  position:relative;overflow:hidden;
+}
+.gradient-band::before{
+  content:"";position:absolute;top:-120px;right:-80px;
+  width:420px;height:420px;
+  border:1px solid rgba(213,220,201,0.10);border-radius:50%;pointer-events:none;
+}
+.gradient-band::after{
+  content:"";position:absolute;bottom:-180px;left:-60px;
+  width:340px;height:340px;
+  border:1px solid rgba(213,220,201,0.07);border-radius:50%;pointer-events:none;
+}
+.gradient-band-inner{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  max-width:1200px;margin:0 auto;
+  position:relative;z-index:1;
+}
+.gradient-stat{text-align:center;padding:14px 28px;border-right:1px solid rgba(213,220,201,0.14)}
+.gradient-stat:last-child{border-right:none}
+.gradient-stat-num{
+  font-family:var(--serif);font-size:clamp(40px,4.5vw,64px);font-weight:300;
+  color:#fff;line-height:1;margin-bottom:10px;letter-spacing:-.03em;
+}
+.gradient-stat-num em{font-style:italic;color:var(--copper-glow)}
+.gradient-stat-label{
+  font-family:var(--mono);font-size:10px;letter-spacing:.28em;
+  text-transform:uppercase;color:rgba(255,255,255,0.52);font-weight:500;
+}
+
+/* ── GRADIENT RULE (section divider) ── */
+.grad-rule{
+  height:4px;
+  background:linear-gradient(90deg,transparent 0%,#3F5640 22%,#8A9A82 50%,#3F5640 78%,transparent 100%);
+  border:none;
+}
+
+/* ── GRADIENT ACCENT STRIP ── */
+.gradient-strip{
+  background:var(--grad-forest);
+  padding:44px 52px;
+  position:relative;overflow:hidden;
+  text-align:center;
+}
+.gradient-strip::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.04'/></svg>");pointer-events:none}
+.gradient-strip-text{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(24px,3vw,38px);color:rgba(255,255,255,0.82);letter-spacing:-.01em;position:relative;z-index:1;max-width:700px;margin:0 auto}
+.gradient-strip-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.36em;text-transform:uppercase;color:var(--copper-glow);margin-bottom:14px;font-weight:500;position:relative;z-index:1}
+
+/* ── BUTTONS (general reuse) ── */
+.btn-primary{display:inline-flex;align-items:center;gap:12px;padding:18px 32px;background:var(--copper);color:#fff;border-radius:2px;font-size:11px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;transition:background .4s var(--ease-out),transform .3s var(--ease-out);border:1px solid var(--copper);cursor:pointer;font-family:var(--mono)}
+.btn-primary:hover{background:var(--copper-deep);border-color:var(--copper-deep);transform:translateY(-1px)}
+.btn-secondary{display:inline-flex;align-items:center;gap:12px;padding:18px 32px;background:transparent;color:var(--ink);border-radius:2px;font-size:11px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;transition:all .4s var(--ease-out);border:1px solid var(--copper);cursor:pointer;font-family:var(--mono)}
+.btn-secondary:hover{background:var(--copper);color:#fff;transform:translateY(-1px)}
 
 /* ── TRUST BAR ── */
 .trust-bar{background:var(--white);border-bottom:1px solid var(--rule);padding:32px 52px}
@@ -177,7 +206,7 @@ section{position:relative}
 .section-title em{font-style:italic;color:var(--copper)}
 .section-sub{font-size:16px;color:var(--ink-dim);max-width:580px;line-height:1.7}
 
-/* ── ABOUT (image now larger) ── */
+/* ── ABOUT ── */
 .about{background:var(--blue-ghost)}
 .about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center}
 .about-image{position:relative;display:flex;justify-content:center;align-items:flex-start}
@@ -210,7 +239,7 @@ section{position:relative}
 .service-card p{font-size:14.5px;color:var(--ink-dim);line-height:1.7;margin-bottom:22px}
 .service-tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass-deep);background:transparent;padding:0;border-radius:0;border-top:1px solid var(--rule);padding-top:14px;width:100%}
 
-/* ── TEAM (grid now fills the section banner) ── */
+/* ── TEAM ── */
 .team{background:var(--blue-ghost)}
 .team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;margin-top:56px;width:100%}
 .team-card{background:var(--bone);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform .6s var(--ease-out),box-shadow .6s var(--ease-out);display:flex;flex-direction:column;border:1px solid var(--rule)}
@@ -235,25 +264,80 @@ section{position:relative}
 .journey-step h4{font-family:var(--serif);font-size:21px;font-weight:500;color:var(--ink);margin-bottom:10px;line-height:1.2;letter-spacing:-.005em}
 .journey-step p{font-size:13.5px;color:var(--ink-dim);line-height:1.7}
 
-/* ── TESTIMONIALS ── */
-.testimonials{background:var(--bone);color:var(--ink);position:relative;overflow:hidden;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
-.testimonials::before{content:"\201C";position:absolute;top:24px;right:48px;font-family:var(--serif);font-size:clamp(180px,22vw,360px);color:var(--brass-light);line-height:.78;opacity:.45;pointer-events:none;font-style:italic;font-weight:500;z-index:0;user-select:none}
-.testimonials .section-inner{position:relative;z-index:1}
-.testimonials .section-eyebrow{color:var(--brass)}
-.testimonials .section-eyebrow::before{background:var(--brass)}
-.testimonials .section-title{color:var(--ink)}
-.testimonials .section-title em{color:var(--copper)}
-.testimonials-list{margin-top:56px;display:flex;flex-direction:column;gap:0}
-.testimonial-item{padding:40px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:1fr 3fr;gap:56px;align-items:start;transition:background .4s var(--ease-out)}
-.testimonial-item:first-child{border-top:1px solid var(--rule)}
-.testimonial-from{display:flex;flex-direction:column;gap:4px}
+/* ── TESTIMONIALS CAROUSEL ── */
+.testimonials{
+  background:var(--bone);color:var(--ink);
+  position:relative;overflow:hidden;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+}
+.testimonials .section-inner{padding-bottom:80px}
+.testimonials-header{text-align:center;margin-bottom:64px}
+.testimonials-header .section-eyebrow{justify-content:center;display:inline-flex}
+.testimonials-header .section-title{margin-bottom:0}
+.testimonials-carousel-wrap{
+  display:flex;align-items:center;gap:24px;
+  max-width:820px;margin:0 auto;
+}
+.testimonials-track{
+  flex:1;position:relative;min-height:300px;
+}
+/* CSS initial: all slides hidden, first shown */
+.testimonial-slide{
+  position:absolute;width:100%;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding:0 16px;gap:0;
+  opacity:0;pointer-events:none;
+}
+.testimonial-slide:first-child{opacity:1;pointer-events:auto}
+
+.testimonial-qmark{
+  font-family:var(--serif);font-size:72px;color:var(--brass);
+  line-height:0.7;margin-bottom:20px;opacity:.5;font-style:italic;
+  display:block;user-select:none;
+}
+.testimonial-quote-text{
+  font-family:var(--serif);
+  font-size:clamp(19px,2.4vw,27px);font-weight:300;font-style:italic;
+  line-height:1.55;color:var(--ink-dim);letter-spacing:-.005em;
+  max-width:640px;margin-bottom:34px;
+}
+.testimonial-author{
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  padding-top:20px;border-top:1px solid var(--rule);width:180px;
+}
 .testimonial-name{font-size:14px;font-weight:500;color:var(--ink);letter-spacing:.005em}
-.testimonial-location{font-size:11.5px;color:var(--ink-faint);font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase;margin-top:2px}
-.testimonial-since{font-size:10.5px;color:var(--brass);font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;margin-top:10px;font-weight:500}
-.testimonial-quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,26px);font-weight:300;font-style:italic;line-height:1.5;color:var(--ink-dim);letter-spacing:-.005em}
+.testimonial-meta{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-deep);margin-top:2px}
+
+/* Arrow buttons */
+.testimonial-btn{
+  width:52px;height:52px;border-radius:50%;
+  border:1px solid var(--rule-strong);background:var(--white);
+  color:var(--ink-dim);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:all .3s var(--ease-out);
+}
+.testimonial-btn:hover{
+  border-color:var(--brass);color:var(--brass);
+  background:rgba(107,122,101,0.06);transform:scale(1.06);
+}
+.testimonial-btn:active{transform:scale(0.96)}
+
+/* Dot indicators */
+.testimonials-dots{
+  display:flex;justify-content:center;gap:8px;
+  margin-top:44px;
+}
+.testimonial-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:rgba(107,122,101,0.25);border:none;cursor:pointer;padding:0;
+  transition:all .4s var(--ease-out);
+}
+.testimonial-dot.dot-active{
+  background:var(--brass);width:26px;border-radius:4px;
+}
 
 /* ── BOOKING CTA ── */
-.booking-cta{background:linear-gradient(135deg,#3F5640 0%,#2A3A2C 55%,#1F2A20 100%);position:relative;overflow:hidden}
+.booking-cta{background:var(--grad-forest);position:relative;overflow:hidden}
 .booking-cta::before{content:"";position:absolute;top:-200px;left:-100px;width:500px;height:500px;border:1px solid rgba(213,220,201,0.12);border-radius:50%;pointer-events:none}
 .booking-cta::after{content:"";position:absolute;bottom:-300px;right:-150px;width:600px;height:600px;border:1px solid rgba(213,220,201,0.08);border-radius:50%;pointer-events:none}
 .booking-cta-inner{display:grid;grid-template-columns:1fr 1fr;gap:0;max-width:1400px;margin:0 auto;padding:100px 52px;position:relative;z-index:1}
@@ -287,7 +371,7 @@ footer{background:linear-gradient(180deg,#2A3A2C 0%,#1F2D20 100%);color:rgba(244
 .footer-divider{display:none}
 .footer-panel{padding:48px 36px}
 .footer-panel-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--copper-glow);margin-bottom:22px;font-weight:500}
-.footer-panel h3{font-family:var(--serif);font-size:24px;font-weight:400;color:#fff;margin-bottom:8px;letter-spacing:-.005em;display:none}
+.footer-panel h3{display:none}
 .footer-panel-sub{display:none}
 .footer-panel p{font-size:13px;line-height:1.8;color:rgba(244,236,219,0.55)}
 .footer-contact-item{display:flex;flex-direction:column;gap:3px;margin-bottom:14px}
@@ -330,53 +414,54 @@ footer{background:linear-gradient(180deg,#2A3A2C 0%,#1F2D20 100%);color:rgba(244
 .reveal-delay-3{transition-delay:.36s}
 .reveal-delay-4{transition-delay:.48s}
 
-/* ── TABLET ── */
-@media(max-width:1100px){
-  .hero-grid{grid-template-columns:1fr;gap:48px}
-  .hero-visual{max-width:560px}
-  .hero-photo{aspect-ratio:16/10}
-}
-
-/* ── MOBILE PHONE FAB ── */
+/* ── MOBILE FAB ── */
 .mobile-call-fab{display:none;position:fixed;bottom:18px;right:18px;z-index:90;background:var(--copper);color:#fff;padding:14px 22px;border-radius:999px;font-size:11px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;font-family:var(--mono);box-shadow:0 8px 28px rgba(63,86,64,0.4);align-items:center;gap:8px;text-decoration:none;transition:all .4s var(--ease-out)}
 .mobile-call-fab:active{transform:scale(0.96)}
 
+/* ── TABLET ── */
+@media(max-width:1100px){
+  .about-grid{grid-template-columns:1fr;gap:48px}
+  .about-image-frame{max-width:380px}
+  .gradient-band-inner{grid-template-columns:repeat(2,1fr)}
+  .gradient-stat{border-right:none;border-bottom:1px solid rgba(213,220,201,0.14)}
+  .gradient-stat:nth-child(odd){border-right:1px solid rgba(213,220,201,0.14)}
+  .gradient-stat:nth-last-child(-n+2){border-bottom:none}
+}
+
 /* ── MOBILE ── */
 @media(max-width:900px){
-  .utility-bar{padding:6px 16px;font-size:10px;letter-spacing:.06em;flex-wrap:wrap;gap:6px;justify-content:center}
-  .utility-left{display:none}
-  .utility-right{gap:8px;font-size:9.5px}
-  .util-divider{display:none}
-  nav{padding:12px 14px 12px 18px;grid-template-columns:1fr auto;top:30px;left:12px;right:12px;gap:16px}
+  nav{padding:12px 14px 12px 18px;grid-template-columns:1fr auto;gap:16px;width:92%}
+  nav.scrolled{width:85%}
   .nav-brand-name{font-size:15px}
   .nav-brand-sub{font-size:8.5px}
   .nav-cta{padding:9px 16px;font-size:9.5px;letter-spacing:.18em}
   nav ul{display:none}
-  .hero{padding:130px 20px 60px}
-  .hero-grid{gap:36px}
-  .hero-photo{aspect-ratio:4/3}
-  .hero-tagline{padding:20px 22px}
-  .hero-tagline-text{font-size:18px}
-  .hero-rule{grid-template-columns:1fr 1fr;gap:24px;margin-top:44px}
-  .hero-social-proof{padding:8px 14px;gap:10px}
-  .hero-social-text{font-size:11.5px}
+  .hero-content-center{padding:0 24px}
+  .hero-content-center h1{font-size:clamp(46px,12vw,78px)}
+  .hero-lede{font-size:14px}
+  .btn-hero-primary{padding:14px 24px;font-size:10px}
+  .btn-hero-secondary{font-size:10px}
+  .hero-meta-bar{padding:20px 16px}
+  .hero-meta-bar-inner{grid-template-columns:1fr 1fr;gap:20px}
+  .gradient-band{padding:40px 20px}
+  .gradient-band-inner{grid-template-columns:repeat(2,1fr)}
+  .gradient-strip{padding:32px 20px}
   .trust-bar{padding:20px 16px}
   .trust-inner{gap:14px}
   .trust-items{gap:18px}
   .trust-item{font-size:13px}
   .trust-divider{display:none}
   .section-inner{padding:70px 20px}
-  .about-grid{grid-template-columns:1fr;gap:48px}
-  .about-image-frame{max-width:380px}
   .services-grid{grid-template-columns:1fr}
   .services-head{flex-direction:column;align-items:flex-start}
   .team-grid{grid-template-columns:1fr;gap:24px}
   .team-body{padding:24px}
   .team-name{font-size:22px}
   .journey-steps{grid-template-columns:1fr 1fr;gap:32px}
-  .testimonial-item{grid-template-columns:1fr;gap:16px}
+  .testimonials-carousel-wrap{gap:12px}
+  .testimonial-btn{width:40px;height:40px}
+  .testimonials-track{min-height:320px}
   .footer-top{grid-template-columns:1fr}
-  .footer-divider{display:none}
   .footer-panel{padding:32px 20px}
   .booking-cta-inner{grid-template-columns:1fr;padding:52px 20px}
   .booking-cta-left{padding-right:0;border-right:none;border-bottom:1px solid rgba(255,255,255,0.12);padding-bottom:40px}
@@ -388,21 +473,6 @@ footer{background:linear-gradient(180deg,#2A3A2C 0%,#1F2D20 100%);color:rgba(244
 </style>
 </head>
 <body>
-
-<!-- UTILITY BAR -->
-<div class="utility-bar">
-  <div class="utility-left">
-    <span class="util-icon">📍</span>
-    <span>Main Street, Kanturk, Co. Cork</span>
-  </div>
-  <div class="utility-right">
-    <a href="tel:+35329XXXXXX"><span class="util-icon">📞</span>(029) XXX XXX</a>
-    <span class="util-divider">·</span>
-    <a href="#book" class="util-emergency">Dental Emergency</a>
-    <span class="util-divider">·</span>
-    <span class="util-badge">GMS &amp; PRSI Accepted</span>
-  </div>
-</div>
 
 <!-- NAV -->
 <nav id="mainNav">
@@ -427,55 +497,33 @@ footer{background:linear-gradient(180deg,#2A3A2C 0%,#1F2D20 100%);color:rgba(244
   <a class="nav-cta" href="#" onclick="openBookingModal();return false;">Book Appointment</a>
 </nav>
 
-<!-- HERO (RESTRUCTURED) -->
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-grid">
-    <div class="hero-content">
-      <div class="hero-eyebrow">North Cork · Est. 1987</div>
-      <h1>Dental care<br>done <em>properly</em>.</h1>
-
-      <!-- NEW: social proof badge -->
-      <div class="hero-social-proof">
-        <span class="hero-stars" aria-label="4.9 out of 5 stars">★★★★★</span>
-        <span class="hero-social-text"><strong>4.9</strong> on Google · 200+ reviews</span>
-        <span class="hero-social-divider"></span>
-        <span class="hero-social-text"><strong>37 years</strong> on Main Street</span>
-      </div>
-
-      <p class="hero-lede">A family practice on Main Street, Kanturk — looking after the same families for nearly four decades. Medical Card holders and PRSI patients welcome.</p>
-      <div class="hero-actions">
-        <button class="btn-primary" onclick="openBookingModal()">
-          Book an Appointment
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
-          Our Services
-        </button>
-      </div>
-    </div>
-
-    <!-- NEW: hero visual column with photo + tagline (replaces old quote) -->
-    <div class="hero-visual">
-      <div class="hero-photo">
-        <img src="practice-interior.png"
-             alt="Modern dental surgery in Kanturk with the river and church visible through the window"
-             loading="eager">
-        <div class="hero-photo-badge">Main Street · Kanturk</div>
-      </div>
-
-      <div class="hero-tagline">
-        <div class="hero-tagline-eyebrow">Owner's words</div>
-        <p class="hero-tagline-text">We treat our patients like neighbours — because most of them are.</p>
-        <div class="hero-tagline-attr">
-          <span class="hero-tagline-name">Dr. Sinéad O'Sullivan</span>
-          <span class="hero-tagline-role">Principal Dentist</span>
-        </div>
-      </div>
+  <div class="hero-bg">
+    <img src="images/practise/practise.jpg"
+         alt="O'Sullivan Family Dental — modern surgery with river views in Kanturk"
+         loading="eager">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content-center">
+    <div class="hero-eyebrow">North Cork · Est. 1987</div>
+    <h1>Dental care<br><em>done properly.</em></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-lede">Advanced family dentistry delivered by expert doctors and nurses across North Cork.</p>
+    <div class="hero-actions">
+      <button class="btn-hero-primary" onclick="openBookingModal()">Book Appointment</button>
+      <button class="btn-hero-secondary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
     </div>
   </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
 
-  <!-- meta strip — now full-width below the grid -->
-  <div class="hero-rule">
+<!-- HERO META BAR -->
+<div class="hero-meta-bar">
+  <div class="hero-meta-bar-inner">
     <div class="hero-meta">
       <span class="hero-meta-label">Address</span>
       <span class="hero-meta-val">Main Street, Kanturk, Co. Cork</span>
@@ -491,6 +539,28 @@ footer{background:linear-gradient(180deg,#2A3A2C 0%,#1F2D20 100%);color:rgba(244
     <div class="hero-meta">
       <span class="hero-meta-label">New patients</span>
       <span class="hero-meta-val" style="color:var(--brass-deep)">From Kanturk, Mallow &amp; Newmarket ↗</span>
+    </div>
+  </div>
+</div>
+
+<!-- GRADIENT BAND — stats / social proof, first section under the nav -->
+<section class="gradient-band">
+  <div class="gradient-band-inner">
+    <div class="gradient-stat">
+      <div class="gradient-stat-num">37<em>+</em></div>
+      <div class="gradient-stat-label">Years on Main Street</div>
+    </div>
+    <div class="gradient-stat">
+      <div class="gradient-stat-num">4.9<em>★</em></div>
+      <div class="gradient-stat-label">Google rating</div>
+    </div>
+    <div class="gradient-stat">
+      <div class="gradient-stat-num">200<em>+</em></div>
+      <div class="gradient-stat-label">Five-star reviews</div>
+    </div>
+    <div class="gradient-stat">
+      <div class="gradient-stat-num"><em>3</em></div>
+      <div class="gradient-stat-label">Generations of patients</div>
     </div>
   </div>
 </section>
@@ -543,31 +613,18 @@ footer{background:linear-gradient(180deg,#2A3A2C 0%,#1F2D20 100%);color:rgba(244
         <p>In 2008, daughter Dr. Sinéad O'Sullivan joined after her degree at UCC and a Fellowship in Dublin. She expanded the practice into the purpose-built surgery it is today.</p>
         <p>Sinéad's son Ciarán is now training at Trinity — the third generation. Dr. Séamus still comes in on Thursdays. If you've been a patient long enough, you'll have seen all three.</p>
         <div class="about-values">
-          <div class="about-value">
-            <div class="val-icon">🤝</div>
-            <h4>Family first</h4>
-            <p>The same families for 37 years. Relationships over transactions.</p>
-          </div>
-          <div class="about-value">
-            <div class="val-icon">🌿</div>
-            <h4>Comfort focused</h4>
-            <p>Unhurried, gentle appointments. No pressure, ever.</p>
-          </div>
-          <div class="about-value">
-            <div class="val-icon">⭐</div>
-            <h4>Clinical excellence</h4>
-            <p>Ongoing training, modern equipment, high standards.</p>
-          </div>
-          <div class="about-value">
-            <div class="val-icon">📍</div>
-            <h4>Rooted locally</h4>
-            <p>Kanturk-based. Patients from Mallow, Newmarket &amp; beyond.</p>
-          </div>
+          <div class="about-value"><div class="val-icon">🤝</div><h4>Family first</h4><p>The same families for 37 years. Relationships over transactions.</p></div>
+          <div class="about-value"><div class="val-icon">🌿</div><h4>Comfort focused</h4><p>Unhurried, gentle appointments. No pressure, ever.</p></div>
+          <div class="about-value"><div class="val-icon">⭐</div><h4>Clinical excellence</h4><p>Ongoing training, modern equipment, high standards.</p></div>
+          <div class="about-value"><div class="val-icon">📍</div><h4>Rooted locally</h4><p>Kanturk-based. Patients from Mallow, Newmarket &amp; beyond.</p></div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- GRADIENT RULE: between about and services -->
+<div class="grad-rule"></div>
 
 <!-- SERVICES -->
 <section class="services" id="services">
@@ -620,6 +677,12 @@ footer{background:linear-gradient(180deg,#2A3A2C 0%,#1F2D20 100%);color:rgba(244
   </div>
 </section>
 
+<!-- GRADIENT STRIP: accent between services and team -->
+<div class="gradient-strip">
+  <div class="gradient-strip-label">Our philosophy</div>
+  <div class="gradient-strip-text">"We treat our patients like neighbours — because most of them are."</div>
+</div>
+
 <!-- TEAM -->
 <section class="team" id="team">
   <div class="section-inner">
@@ -629,7 +692,7 @@ footer{background:linear-gradient(180deg,#2A3A2C 0%,#1F2D20 100%);color:rgba(244
     <div class="team-grid">
       <div class="team-card reveal">
         <div class="team-photo">
-          <img src="images/sinead-osullivan.jpg" alt="Dr. Sinéad O'Sullivan" loading="lazy" style="object-position:center 28%">
+          <img src="images/team/sinead-osullivan.jpg" alt="Dr. Sinéad O'Sullivan" loading="lazy" style="object-position:center 28%">
           <div class="team-role-badge">Principal Dentist</div>
         </div>
         <div class="team-body">
@@ -646,7 +709,7 @@ footer{background:linear-gradient(180deg,#2A3A2C 0%,#1F2D20 100%);color:rgba(244
       </div>
       <div class="team-card reveal reveal-delay-1">
         <div class="team-photo">
-          <img src="images/seamus-osullivan.jpg" alt="Dr. Séamus O'Sullivan" loading="lazy" style="object-position:center 30%">
+          <img src="images/team/seamus-osullivan.jpg" alt="Dr. Séamus O'Sullivan" loading="lazy" style="object-position:center 30%">
           <div class="team-role-badge">Founder</div>
         </div>
         <div class="team-body">
@@ -662,7 +725,7 @@ footer{background:linear-gradient(180deg,#2A3A2C 0%,#1F2D20 100%);color:rgba(244
       </div>
       <div class="team-card reveal reveal-delay-2">
         <div class="team-photo">
-          <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="Dr. Patrick Cronin" loading="lazy">
+          <img src="images/team/patrick-cronin.jpg" alt="Dr. Patrick Cronin" loading="lazy">
           <div class="team-role-badge">Associate Dentist</div>
         </div>
         <div class="team-body">
@@ -679,7 +742,7 @@ footer{background:linear-gradient(180deg,#2A3A2C 0%,#1F2D20 100%);color:rgba(244
       </div>
       <div class="team-card reveal reveal-delay-2">
         <div class="team-photo">
-          <img src="images/aine-murphy.jpg" alt="Áine Murphy" loading="lazy" style="object-position:30% 25%">
+          <img src="images/team/aine-murphy.jpg" alt="Áine Murphy" loading="lazy" style="object-position:30% 25%">
           <div class="team-role-badge">Dental Hygienist</div>
         </div>
         <div class="team-body">
@@ -697,6 +760,9 @@ footer{background:linear-gradient(180deg,#2A3A2C 0%,#1F2D20 100%);color:rgba(244
   </div>
 </section>
 
+<!-- GRADIENT RULE: between team and journey -->
+<div class="grad-rule"></div>
+
 <!-- PATIENT JOURNEY -->
 <section class="journey">
   <div class="section-inner">
@@ -705,61 +771,70 @@ footer{background:linear-gradient(180deg,#2A3A2C 0%,#1F2D20 100%);color:rgba(244
       <h2 class="section-title" style="max-width:440px;margin-inline:auto">What to expect<br>the first time.</h2>
     </div>
     <div class="journey-steps">
-      <div class="journey-step reveal">
-        <span class="step-num">01</span>
-        <h4>Give us a ring</h4>
-        <p>By phone or online. Currently accepting new patients from Kanturk, Mallow, Newmarket and surrounding areas.</p>
-      </div>
-      <div class="journey-step reveal reveal-delay-1">
-        <span class="step-num">02</span>
-        <h4>Warm welcome</h4>
-        <p>Calm, unhurried atmosphere from the moment you arrive on Main Street.</p>
-      </div>
-      <div class="journey-step reveal reveal-delay-2">
-        <span class="step-num">03</span>
-        <h4>Thorough assessment</h4>
-        <p>Full exam and digital X-rays. We listen before recommending anything.</p>
-      </div>
-      <div class="journey-step reveal reveal-delay-3">
-        <span class="step-num">04</span>
-        <h4>Your treatment plan</h4>
-        <p>Clear options, honest costs. PRSI &amp; Medical Card cover explained upfront.</p>
-      </div>
+      <div class="journey-step reveal"><span class="step-num">01</span><h4>Give us a ring</h4><p>By phone or online. Currently accepting new patients from Kanturk, Mallow, Newmarket and surrounding areas.</p></div>
+      <div class="journey-step reveal reveal-delay-1"><span class="step-num">02</span><h4>Warm welcome</h4><p>Calm, unhurried atmosphere from the moment you arrive on Main Street.</p></div>
+      <div class="journey-step reveal reveal-delay-2"><span class="step-num">03</span><h4>Thorough assessment</h4><p>Full exam and digital X-rays. We listen before recommending anything.</p></div>
+      <div class="journey-step reveal reveal-delay-3"><span class="step-num">04</span><h4>Your treatment plan</h4><p>Clear options, honest costs. PRSI &amp; Medical Card cover explained upfront.</p></div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
+<!-- TESTIMONIALS CAROUSEL -->
 <section class="testimonials">
   <div class="section-inner">
-    <div class="section-eyebrow">Patient stories</div>
-    <h2 class="section-title">What our patients <em>say</em>.</h2>
-    <div class="testimonials-list">
-      <div class="testimonial-item reveal">
-        <div class="testimonial-from">
-          <span class="testimonial-name">Mairéad Collins</span>
-          <span class="testimonial-location">Kanturk</span>
-          <span class="testimonial-since">Patient since 1998</span>
-        </div>
-        <div class="testimonial-quote">"I came here as a child, and now my own kids come. They actually look forward to it — which I never thought I'd be able to say about a dentist."</div>
-      </div>
-      <div class="testimonial-item reveal reveal-delay-1">
-        <div class="testimonial-from">
-          <span class="testimonial-name">Donal McCarthy</span>
-          <span class="testimonial-location">Millstreet</span>
-          <span class="testimonial-since">Patient since 2014</span>
-        </div>
-        <div class="testimonial-quote">"Rang on a Friday afternoon with a desperate toothache. They got me in the same day. Pain was gone by evening. Brilliant."</div>
-      </div>
-      <div class="testimonial-item reveal reveal-delay-2">
-        <div class="testimonial-from">
-          <span class="testimonial-name">Siobhán O'Keeffe</span>
-          <span class="testimonial-location">Newmarket</span>
-          <span class="testimonial-since">Patient since 2019</span>
-        </div>
-        <div class="testimonial-quote">"Hadn't been near a dentist in years. Dr. Cronin never once made me feel bad about it — just sorted it out gradually. Now I go every six months, no bother."</div>
-      </div>
+
+    <div class="testimonials-header">
+      <div class="section-eyebrow">Patient stories</div>
+      <h2 class="section-title">What our patients <em>say</em>.</h2>
     </div>
+
+    <div class="testimonials-carousel-wrap" id="testimonialCarousel">
+      <!-- Prev arrow -->
+      <button class="testimonial-btn testimonial-btn-prev" aria-label="Previous testimonial">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+
+      <!-- Track -->
+      <div class="testimonials-track" id="testimonialTrack">
+        <div class="testimonial-slide">
+          <span class="testimonial-qmark">"</span>
+          <p class="testimonial-quote-text">I came here as a child, and now my own kids come. They actually look forward to it — which I never thought I'd be able to say about a dentist.</p>
+          <div class="testimonial-author">
+            <span class="testimonial-name">Mairéad Collins</span>
+            <span class="testimonial-meta">Kanturk · Since 1998</span>
+          </div>
+        </div>
+        <div class="testimonial-slide">
+          <span class="testimonial-qmark">"</span>
+          <p class="testimonial-quote-text">Rang on a Friday afternoon with a desperate toothache. They got me in the same day. Pain was gone by evening. Brilliant.</p>
+          <div class="testimonial-author">
+            <span class="testimonial-name">Donal McCarthy</span>
+            <span class="testimonial-meta">Millstreet · Since 2014</span>
+          </div>
+        </div>
+        <div class="testimonial-slide">
+          <span class="testimonial-qmark">"</span>
+          <p class="testimonial-quote-text">Hadn't been near a dentist in years. Dr. Cronin never once made me feel bad about it — just sorted it out gradually. Now I go every six months, no bother.</p>
+          <div class="testimonial-author">
+            <span class="testimonial-name">Siobhán O'Keeffe</span>
+            <span class="testimonial-meta">Newmarket · Since 2019</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Next arrow -->
+      <button class="testimonial-btn testimonial-btn-next" aria-label="Next testimonial">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+
+    <!-- Dot indicators -->
+    <div class="testimonials-dots" id="testimonialDots">
+      <button class="testimonial-dot dot-active" aria-label="Slide 1"></button>
+      <button class="testimonial-dot" aria-label="Slide 2"></button>
+      <button class="testimonial-dot" aria-label="Slide 3"></button>
+    </div>
+
   </div>
 </section>
 
@@ -850,7 +925,7 @@ footer{background:linear-gradient(180deg,#2A3A2C 0%,#1F2D20 100%);color:rgba(244
   </div>
 </footer>
 
-<!-- MOBILE PHONE FAB -->
+<!-- MOBILE FAB -->
 <a href="tel:+35329XXXXXX" class="mobile-call-fab" aria-label="Call the practice">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/></svg>
   Call us
@@ -878,32 +953,107 @@ footer{background:linear-gradient(180deg,#2A3A2C 0%,#1F2D20 100%);color:rgba(244
 </div>
 
 <script>
-  // ── BOOKING MODAL ───────────────────────────────────────────────────
-  function openBookingModal(){ document.getElementById('bookingModal').classList.add('active'); document.body.style.overflow='hidden'; }
-  function closeBookingModal(e){ if(e && e.target.id !== 'bookingModal' && e.type==='click') return; document.getElementById('bookingModal').classList.remove('active'); document.body.style.overflow=''; }
-  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeBookingModal(); });
+// ── BOOKING MODAL ──────────────────────────────────────────────────────
+function openBookingModal(){ document.getElementById('bookingModal').classList.add('active'); document.body.style.overflow='hidden'; }
+function closeBookingModal(e){ if(e && e.target.id !== 'bookingModal' && e.type==='click') return; document.getElementById('bookingModal').classList.remove('active'); document.body.style.overflow=''; }
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeBookingModal(); });
 
-  // Nav scroll effect
-  window.addEventListener('scroll', () => {
-    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 20);
+// ── NAV SCROLL ─────────────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── REVEAL ON SCROLL ───────────────────────────────────────────────────
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }});
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ── SERVICE CARD MOUSE FOLLOW ──────────────────────────────────────────
+document.querySelectorAll('.service-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', ((e.clientX-r.left)/r.width*100)+'%');
+    card.style.setProperty('--my', ((e.clientY-r.top)/r.height*100)+'%');
+  });
+});
+
+// ── TESTIMONIALS CAROUSEL ──────────────────────────────────────────────
+(function() {
+  const track    = document.getElementById('testimonialTrack');
+  const dotsWrap = document.getElementById('testimonialDots');
+  const carousel = document.getElementById('testimonialCarousel');
+  if (!track) return;
+
+  const slides = Array.from(track.querySelectorAll('.testimonial-slide'));
+  const dots   = Array.from(dotsWrap.querySelectorAll('.testimonial-dot'));
+  const DUR    = 560; // ms transition duration
+  let current  = 0;
+  let busy     = false;
+  let timer;
+
+  // Initialise: set all slides to absolute, hidden; show first
+  slides.forEach((s, i) => {
+    s.style.opacity       = i === 0 ? '1' : '0';
+    s.style.transform     = 'translateX(0)';
+    s.style.pointerEvents = i === 0 ? 'auto' : 'none';
+    s.style.transition    = '';
   });
 
-  // Reveal on scroll
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  function goTo(next, dir) {
+    if (busy || next === current) return;
+    busy = true;
 
-  // Mouse-follow gradient on service cards
-  document.querySelectorAll('.service-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      card.style.setProperty('--mx', x + '%');
-      card.style.setProperty('--my', y + '%');
-    });
-  });
+    const from = slides[current];
+    const to   = slides[next];
+    const outX = dir === 'next' ? '-72px' : '72px';
+    const inX  = dir === 'next' ?  '72px' : '-72px';
+
+    // Exit outgoing
+    from.style.transition = `opacity ${DUR}ms cubic-bezier(0.4,0,0.2,1), transform ${DUR}ms cubic-bezier(0.4,0,0.2,1)`;
+    from.style.opacity    = '0';
+    from.style.transform  = `translateX(${outX})`;
+    from.style.pointerEvents = 'none';
+
+    // Position incoming off-screen (no transition)
+    to.style.transition   = 'none';
+    to.style.transform    = `translateX(${inX})`;
+    to.style.opacity      = '0';
+
+    // Force reflow so the initial off-screen position is painted
+    to.getBoundingClientRect();
+
+    // Animate incoming
+    to.style.transition   = `opacity ${DUR}ms cubic-bezier(0.16,1,0.3,1), transform ${DUR}ms cubic-bezier(0.16,1,0.3,1)`;
+    to.style.opacity      = '1';
+    to.style.transform    = 'translateX(0)';
+    to.style.pointerEvents = 'auto';
+
+    current = next;
+    dots.forEach((d, i) => d.classList.toggle('dot-active', i === current));
+
+    setTimeout(() => { busy = false; }, DUR + 60);
+  }
+
+  function next() { goTo((current + 1) % slides.length, 'next'); }
+  function prev() { goTo((current - 1 + slides.length) % slides.length, 'prev'); }
+
+  function startAuto() { timer = setInterval(next, 5200); }
+  function stopAuto()  { clearInterval(timer); }
+  function resetAuto() { stopAuto(); startAuto(); }
+
+  document.querySelector('.testimonial-btn-next').addEventListener('click', () => { next(); resetAuto(); });
+  document.querySelector('.testimonial-btn-prev').addEventListener('click', () => { prev(); resetAuto(); });
+  dots.forEach((d, i) => d.addEventListener('click', () => {
+    goTo(i, i > current ? 'next' : 'prev'); resetAuto();
+  }));
+
+  // Pause on hover
+  carousel.addEventListener('mouseenter', stopAuto);
+  carousel.addEventListener('mouseleave', startAuto);
+
+  startAuto();
+})();
 </script>
 </body>
 </html>
